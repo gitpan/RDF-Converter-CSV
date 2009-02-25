@@ -160,9 +160,13 @@ sub write
 	$writer->end();
 }
 
-=head1 AUTHOR
+=head1 AUTHORS
 
-Arshad Mohamed, C<< <arshad25 at gmail.com> >>
+Arshad Mohamed, Khader Shameer and R. Sowdhamini RDF::Converter Team C<< <arshad25 at gmail.com> >>, C<< <shameer at ncbs.res.in> >>, C<< <mini at ncbs.res.in> >>
+
+=head1 ACKNOWLEDGEMENTS 
+Funding : 
+
 
 =head1 BUGS
 
@@ -187,13 +191,9 @@ L<http://search.cpan.org/dist/RDF-Converter-CSV/>
 =back
 
 
-=head1 ACKNOWLEDGEMENTS
-
-Shameer Khadar, Mohsen Basirat, Adly Abdullah, Harish Sankar, Naveen Padmadas
-
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Arshad Mohamed, all rights reserved.
+Copyright 2009 Arshad Mohamed, Khader Shameer & R. Sowdhamini, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
