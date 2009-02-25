@@ -25,9 +25,7 @@ my $rdf = RDF::Converter::CSV->new(
 					Structure_of_swapped_region/
 				] #OPTIONAL - will take the first row as the field names, if COLUMNS not given or the number of elements in COLUMN  != the number of fields in the csv file
 	);
-RDF::Converter::CSV= sub {
-  print "AHHAHAHA";
-};
+$rdf->write;
 
 =pod
 Other useful methods

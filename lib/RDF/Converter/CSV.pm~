@@ -18,7 +18,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
@@ -26,28 +26,32 @@ our $VERSION = '0.01';
    use RDF::Converter::CSV;
    use strict;
    use warnings;
-   my $rdf = RDF->new(
-	    FILENAME 	=> 'books.csv', #MANDATORY
-	    URI		=>'http://nothing.nul/', #MANDATORY
-	    PREFIX 	=> 'lib', #MANDATORY
-	    PRIMARY 	=> 'id', #OPTIONAL - will take one of the field as identifier, if not given 
-	    OUTPUT	=> 'books.rdf',#OPTIONAL - will output on the terminal, if not given
-	    COLUMNS	=> [ 	
-			    qw/
-			    id 
-			    title
-			    author
-			    price
-			   ] #OPTIONAL - will take the first row as the field names, if COLUMNS not given or the number of elements in COLUMN  != the number of fields in the CSV file
-    );
+   my $rdf =  RDF::Converter::CSV->new(
+		    FILENAME 	=> 'books.csv', #MANDATORY
+		    URI		=>'http://nothing.nul/', #MANDATORY
+		    PREFIX 	=> 'lib', #MANDATORY
+		    PRIMARY 	=> 'id', #OPTIONAL - will take one of the field as identifier, if not given 
+		    OUTPUT	=> 'books.rdf',#OPTIONAL - will output on the terminal, if not given
+		    COLUMNS	=> [ 	
+				    qw/
+					    id 
+					    title
+					    author
+					    price
+					/
+				   	] #OPTIONAL - will take the first row as the field names, 
+					#if COLUMNS not given or 
+					#the number of elements in COLUMN  != the number of fields in the CSV file
+	    );
    $rdf->write;
 
+=head1 OTHER METHODS
 
-=head2 function1
+	$rdf->get_file;
+	returns the array ref of the file content
 
- This is the constructor for the RDF. FILENAME,URI and PREFIX are mandatory.
- Other optional attrributes include PRIMARY - the main identifier, 
- OUTPUT - output file name, COLUMNS - column/field/tag names.
+	$rdf->csv_process;
+	returns the csv data as a array ref of hash refs
 
 =cut
 
@@ -74,10 +78,7 @@ sub new
 	$output{ident $this} 	= $params{OUTPUT};
 	return $this;
 }
-
-=head2 function2
- This returns the CSV file data as an array reference
-=cut
+#This retrieves the CSV data as an array ref
 sub get_file
 {
 	my ($this) 	= shift;
@@ -91,10 +92,8 @@ sub get_file
 	close $io;
 	return \@data;
 }
-=head2 function2
- This method returns the CSV content as a data structure. 
-=cut
 
+#This converts the csv content as a data structure
 sub csv_process
 {
 	my ($this) 	= shift;
@@ -119,10 +118,8 @@ sub csv_process
 	close $io;
 	return \@perl_data;
 }
-=head2 function2
- This is the main method in RDF which converts the CSV to RDF format with the 
- help of XML::Writer.
-=cut
+
+#Converts CSV to RDF
 sub write
 {
 	my ($this) 	= shift;
@@ -162,6 +159,7 @@ sub write
 	$writer->endTag([$rdfns, "RDF"]);
 	$writer->end();
 }
+
 =head1 AUTHOR
 
 Arshad Mohamed, C<< <arshad25 at gmail.com> >>
@@ -190,6 +188,7 @@ L<http://search.cpan.org/dist/RDF-Converter-CSV/>
 
 
 =head1 ACKNOWLEDGEMENTS
+
 Shameer Khadar, Mohsen Basirat, Adly Abdullah, Harish Sankar, Naveen Padmadas
 
 =head1 COPYRIGHT & LICENSE
